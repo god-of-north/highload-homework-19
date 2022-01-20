@@ -21,6 +21,8 @@ cd highload-homework-19
 
 ### Ensure, that replication is working
 
+Script `test.sh` creates table and insert some data to it. After that reads the data from each node.
+
 ```
 $ ./test.sh
 =================== Testing the replication ====================
@@ -50,6 +52,12 @@ id      username        password        age
 ```
 
 ### Try to turn off mysql-s1
+
+The script `test.py` inserts data to the database twice in a second and shows data count on each node once a 5sec.
+
+Below you can see that `mysql_slave1` node was turned off, than turned on.
+
+After turning on `mysql_slave1` starts to sync missed data.
 
 ```
 $ docker exec mysql_tester sh -c "python /src/test.py"
@@ -88,6 +96,8 @@ Hall794 Fitz Hall Fitz2283@super-mail.net
 ```
 
 ### Try to remove a column in database on slave node
+
+After altering table on slave node `mysql_slave1` replication for this node was stopped.
 
 ```
 $ docker exec mysql_tester sh -c "python /src/test.py"
